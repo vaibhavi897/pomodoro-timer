@@ -1,0 +1,31 @@
+{
+  "name": "pomodoro-timer",
+  "version": "1.0.0",
+  "description": "A beautiful and functional Pomodoro timer to boost productivity",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 3000",
+    "dev": "npx live-server --port=3000"
+  },
+  "keywords": [
+    "pomodoro",
+    "timer",
+    "productivity",
+    "focus",
+    "time-management"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/pomodoro-timer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/pomodoro-timer/issues"
+  },
+  "homepage": "https://github.com/yourusername/pomodoro-timer#readme"
+}

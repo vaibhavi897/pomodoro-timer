@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Focus Timer</h1>
+            <p class="subtitle">Stay productive with the Pomodoro Technique</p>
+        </header>
+
+        <main class="timer-container">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="work">Work</button>
+                <button class="mode-btn" data-mode="shortBreak">Short Break</button>
+                <button class="mode-btn" data-mode="longBreak">Long Break</button>
+            </div>
+
+            <div class="timer-display">
+                <div class="progress-ring">
+                    <svg class="progress-ring-svg" width="280" height="280">
+                        <circle
+                            class="progress-ring-background"
+                            stroke="rgba(255, 255, 255, 0.1)"
+                            stroke-width="4"
+                            fill="transparent"
+                            r="134"
+                            cx="140"
+                            cy="140"
+                        />
+                        <circle
+                            class="progress-ring-circle"
+                            stroke="#ff6b6b"
+                            stroke-width="4"
+                            fill="transparent"
+                            r="134"
+                            cx="140"
+                            cy="140"
+                            stroke-dasharray="841.15"
+                            stroke-dashoffset="841.15"
+                        />
+                    </svg>
+                    <div class="timer-text">
+                        <span class="time-display">25:00</span>
+                        <span class="session-type">Focus Time</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn play-pause-btn" id="playPauseBtn">
+                    <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <svg class="pause-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                    </svg>
+                </button>
+                <button class="control-btn reset-btn" id="resetBtn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="session-info">
+                <div class="session-counter">
+                    <span class="counter-label">Sessions Completed</span>
+                    <span class="counter-value" id="sessionCount">0</span>
+                </div>
+                <div class="next-break">
+                    <span class="break-label">Next break in</span>
+                    <span class="break-value" id="breakCountdown">4 sessions</span>
+                </div>
+            </div>
+        </main>
+
+        <div class="settings-panel">
+            <h3>Settings</h3>
+            <div class="setting-group">
+                <label for="workDuration">Work Duration (minutes)</label>
+                <input type="number" id="workDuration" value="25" min="1" max="60">
+            </div>
+            <div class="setting-group">
+                <label for="shortBreakDuration">Short Break (minutes)</label>
+                <input type="number" id="shortBreakDuration" value="5" min="1" max="30">
+            </div>
+            <div class="setting-group">
+                <label for="longBreakDuration">Long Break (minutes)</label>
+                <input type="number" id="longBreakDuration" value="15" min="1" max="60">
+            </div>
+            <div class="setting-group">
+                <label>
+                    <input type="checkbox" id="soundEnabled" checked>
+                    Sound Notifications
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Interface -->
+    <div class="chatbot-container">
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <svg class="chat-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+            </svg>
+            <svg class="close-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+            </svg>
+        </button>
+        
+        <div class="chatbot-window hidden" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3>Focus Coach</h3>
+                <p>Your productivity companion</p>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        <p>Hi there! 👋 I'm your Focus Coach. I'm here to help you stay productive and make the most of your Pomodoro sessions!</p>
+                        <p>Try asking me about focus tips, break suggestions, or how to customize your timer.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Ask me anything about productivity..." maxlength="200">
+                <button id="chatbotSend">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="notificationSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmUZBzyAx/HVfCkFLIXQ8tiAJwcUhbXnyMMiCSqBkdMNjR0KKXO/8+6CTgYihqLrxqweEB53wfHViTAGJXfJ8+OAMAYvjqXoyrMgByZ2x/PjgC8ELYPBzuGOKwUhfbjo39EMF1SYvfPGahoOHI3X8t15JAQyg8n00HcpBSyEzvLZgyoFLILO8tiAMQYneMnz44BRAhSDqeuKhgQlcsXxzW0gBiS5y+K3bxyBivzjqHNZDbQmqpK1xKVQNVhbkHfEAiCPEtYQ5Ao7TJAQORNAtJB5AwAy" type="audio/wav">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
